@@ -1,4 +1,7 @@
-(* See http://en.wikibooks.org/wiki/Haskell/GADT#Safe_Lists
+(* Values of type mylist can be safe or unsafe. Unsafe lists cannot be passed
+ * to the safe_hd function.
+ *
+ * See http://en.wikibooks.org/wiki/Haskell/GADT#Safe_Lists
  * for a Haskell equivalent. *)
 
 type safe
