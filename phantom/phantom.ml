@@ -2,30 +2,35 @@ type foo = Foo
 type bar = Bar
 type baz = Baz
 
+type _ mark =
+  | FooM : foo mark
+  | BarM : bar mark
+  | BazM : baz mark
+
 type _ container =
-  | Foo_ : string -> foo container
-  | Bar_ : string -> bar container
-  | Baz_ : string -> baz container
+  | FooC : string -> foo container
+  | BarC : string -> bar container
+  | BazC : string -> baz container
 
 let to_string : type a . a container -> string = function
-  | Foo_ str -> str
-  | Bar_ str -> str
-  | Baz_ str -> str
+  | FooC str -> str
+  | BarC str -> str
+  | BazC str -> str
 
 let get_type : type a . a container -> a = function
-  | Foo_ str -> Foo
-  | Bar_ str -> Bar
-  | Baz_ str -> Baz
+  | FooC str -> Foo
+  | BarC str -> Bar
+  | BazC str -> Baz
 
-(*
-let make_container : type a . a -> string -> a container =
-  (fun typ str ->
-    match typ with
-    | Foo -> Foo_ str
-    | Bar -> Bar_ str
-    | Baz -> Baz_ str)
-*)
+let make_container : type a . a mark -> string -> a container =
+  (fun mark str ->
+    match mark with
+    | FooM -> FooC str
+    | BarM -> BarC str
+    | BazM -> BazC str)
 
 let () =
-  let container = Foo_ "ok" in
-  print_endline (to_string container)
+  let container1 = FooC "ok" in
+  print_endline (to_string container1);
+  let container2 = make_container BarM "bar" in
+  print_endline (to_string container2)
