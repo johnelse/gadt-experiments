@@ -1,4 +1,4 @@
-COMPONENTS=safelist
+COMPONENTS=phantom safelist
 
 .PHONY: all clean
 
